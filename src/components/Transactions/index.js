@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMoralis, useMoralisWeb3Api } from "react-moralis";
-import { useState } from "react/cjs/react.development";
 
 export const Transactions = () => {
   const web3 = useMoralisWeb3Api();
