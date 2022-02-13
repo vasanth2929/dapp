@@ -12,10 +12,11 @@ export const Profile = () => {
   };
   return (
     <div>
-      <h3>Profile</h3>
       <p>Username : {user.getUsername()}</p>
-      <p>Address: {user.get("ethAddress")}</p>
-      <form onSubmit={handleSubmit}>
+      <p className="text-ellipsis overflow-hidden">
+        Address: {user.get("ethAddress")}
+      </p>
+      {/* <form onSubmit={handleSubmit}>
         <label>Change Username</label>
         <input
           value={name}
@@ -23,7 +24,7 @@ export const Profile = () => {
           className="outline-none border-2 border-purple-400 block p-2 rounded-md mt-2"
         />
         <button className="mt-2">Change</button>
-      </form>
+      </form> */}
     </div>
   );
 };

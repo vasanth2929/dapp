@@ -7,6 +7,7 @@ export const Balance = () => {
   const web3 = useMoralisWeb3Api();
   const [balances, setBalances] = useState();
   const [tokenBalances, setTokenBalances] = useState([]);
+  const [loading, setLoading] = useState(true);
   const fetchBalances = async () => {
     try {
       const result = await web3.account.getNativeBalance({
@@ -23,17 +24,18 @@ export const Balance = () => {
         address: user.get("ethAddress"),
       });
       setTokenBalances(result);
+      setLoading(false);
     } catch (error) {}
   };
   useEffect(() => {
     fetchBalances();
     fetchTokens();
   }, []);
+  if (loading) return <div>Loading...</div>;
   return (
     <div>
-      <h3>Balance</h3>
       <p>
-        ETH: {balances} <b>ETH</b>
+        {balances} <b>ETH</b>
       </p>
       <>
         {tokenBalances.map((token) => {

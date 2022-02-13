@@ -6,6 +6,7 @@ export const Transactions = () => {
   const web3 = useMoralisWeb3Api();
   const { user } = useMoralis();
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const fetchTransactions = async () => {
     const result = await web3.account.getTransactions({
       limit: 5,
@@ -13,19 +14,21 @@ export const Transactions = () => {
       address: user.get("ethAddress"),
     });
     setTransactions(result.result);
+    setLoading(false);
   };
   useEffect(() => {
     fetchTransactions();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
   return (
     <div>
-      <h3>Transactions</h3>
       <>
         {transactions.map((transaction) => {
           return (
             <a
               href={`https://rinkeby.etherscan.io/tx/${transaction.hash}`}
-              className="block"
+              className="block text-ellipsis overflow-hidden"
               target="_blank"
               key={transaction.hash}
             >
